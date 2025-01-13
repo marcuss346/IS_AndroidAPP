@@ -4,13 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private TextView osebe;
     private String url = "https://healthcare-dsgkcuetdvfxaae6.italynorth-01.azurewebsites.net/api/v1/patients" ;
+    private String url2 = "http://127.0.0.1:5001/api/v1/patients";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  void prikaziOsebe(View view){
         if (view != null){
-            JsonArrayRequest request = new JsonArrayRequest(url, jsonArrayListener, errorListener);
+            JsonArrayRequest request = new JsonArrayRequest(url2, jsonArrayListener, errorListener);
             requestQueue.add(request);
         }
     }
