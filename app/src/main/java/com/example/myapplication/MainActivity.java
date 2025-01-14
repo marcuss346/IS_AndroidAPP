@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -24,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private String url = "https://healthcare-dsgkcuetdvfxaae6.italynorth-01.azurewebsites.net/api/v1/patients" ;
     private String url2 = "http://127.0.0.1:5001/api/v1/patients";
 
+    public static final String EXTRA_MESSAGE = "com.example.universityapp.MESSAGE";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +39,21 @@ public class MainActivity extends AppCompatActivity {
 
     public  void prikaziOsebe(View view){
         if (view != null){
-            JsonArrayRequest request = new JsonArrayRequest(url2, jsonArrayListener, errorListener);
+            JsonArrayRequest request = new JsonArrayRequest(url, jsonArrayListener, errorListener);
             requestQueue.add(request);
         }
     }
 
+    public void addPatientActivity (View view) {
+        Intent intent = new Intent(this,AddPatientActivity.class);
+        String message = "Dodaj studenta v seznam.";
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+
     private Response.Listener<JSONArray> jsonArrayListener = new Response.Listener<JSONArray>() {
+        @SuppressLint("SetTextI18n")
         @Override
         public void onResponse(JSONArray response){
             ArrayList<String> data = new ArrayList<>();
@@ -69,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         }
+
+
 
     };
 
