@@ -24,6 +24,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddPatientActivity extends AppCompatActivity {
 
@@ -104,6 +106,15 @@ public class AddPatientActivity extends AppCompatActivity {
                     return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
                 }
 
+                @Override
+                public Map<String,String> getHeaders() throws AuthFailureError
+                {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("ApiKey", "NePoznasGesla");
+                    params.put("Content-Type", "application/json");
+                    return params;
+                }
+
             };
 
             requestQueue.add(stringRequest);
@@ -114,3 +125,5 @@ public class AddPatientActivity extends AppCompatActivity {
 
     }
 }
+
+
